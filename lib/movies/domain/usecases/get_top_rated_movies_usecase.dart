@@ -8,7 +8,7 @@ class GetTopRatedMoviesUseCase {
 
   GetTopRatedMoviesUseCase(this.baseMovieRepository);
 
-  Future<Either<Failure ,Iterable<Movies>>> execute()async{
+  Future<Either<Failure ,List<Movies>>?> execute()async{
     return await baseMovieRepository.getTopRatedMovies();
   }
 }

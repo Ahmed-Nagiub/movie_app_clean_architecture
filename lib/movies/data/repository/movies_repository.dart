@@ -11,30 +11,30 @@ class MoviesRepository extends BaseMovieRepository {
   MoviesRepository({required this.baseMovieRemoteDataSource});
 
   @override
-  Future<Either<Failure ,Iterable<Movies>>> getNowPlayingMovies()async {
+  Future<Either<Failure ,List<Movies>>> getNowPlayingMovies()async {
     final result = await baseMovieRemoteDataSource.getNowPlayingMovies();
     try{
-      return Right(result.cast<Movies>());
+      return Right(result!.cast<Movies>());
     }on ServerException catch (failure){
       return Left(ServerFailure(message: failure.errorMessageModel.statusMessage));
     } 
   }
 
   @override
-  Future<Either<Failure ,Iterable<Movies>>> getPopularMovies() async{
+  Future<Either<Failure ,List<Movies>>> getPopularMovies() async{
     final result = await baseMovieRemoteDataSource.getPopularMovies();
     try{
-      return Right(result.cast<Movies>());
+      return Right(result!.cast<Movies>());
     }on ServerException catch (failure){
       return Left(ServerFailure(message: failure.errorMessageModel.statusMessage));
     }
   }
 
   @override
-  Future<Either<Failure ,Iterable<Movies>>> getTopRatedMovies() async{
+  Future<Either<Failure ,List<Movies>>> getTopRatedMovies() async{
     final result = await baseMovieRemoteDataSource.getTopRatedMovies();
     try{
-      return Right(result.cast<Movies>());
+      return Right(result!.cast<Movies>());
     }on ServerException catch (failure){
       return Left(ServerFailure(message: failure.errorMessageModel.statusMessage));
     }

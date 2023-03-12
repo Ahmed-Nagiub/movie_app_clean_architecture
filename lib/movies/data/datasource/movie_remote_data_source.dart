@@ -5,21 +5,21 @@ import 'package:movie_app_ca/core/network/error_message_model.dart';
 import 'package:movie_app_ca/movies/data/models/movie_model.dart';
 
 abstract class BaseMovieRemoteDataSource {
-  Future<Iterable<MoviesModel>> getNowPlayingMovies();
-  Future<Iterable<MoviesModel>> getPopularMovies();
-  Future<Iterable<MoviesModel>> getTopRatedMovies();
+  Future<List<MoviesModel>?> getNowPlayingMovies();
+
+  Future<List<MoviesModel>?> getPopularMovies();
+
+  Future<List<MoviesModel>?> getTopRatedMovies();
 }
 
 class MovieRemoteDataSource extends BaseMovieRemoteDataSource {
-
-
   @override
-  Future<Iterable<MoviesModel>> getNowPlayingMovies() async {
+  Future<List<MoviesModel>?> getNowPlayingMovies() async {
     final response = await Dio().get(ApiConstance.nowPlayingMoviesPath);
-
+    print(response);
     if (response.statusCode == 200) {
-      return List<MoviesModel>.from(response.data["results"] as List)
-          .map((e) => MoviesModel.fromJson(e as Map<String, dynamic>));
+      return List.from((response.data["results"] as List)
+          .map((e) => MoviesModel.fromJson(e)));
     } else {
       throw ServerException(
           errorMessageModel: ErrorMessageModel.froJson(response.data));
@@ -27,12 +27,12 @@ class MovieRemoteDataSource extends BaseMovieRemoteDataSource {
   }
 
   @override
-  Future<Iterable<MoviesModel>> getPopularMovies() async {
+  Future<List<MoviesModel>?> getPopularMovies() async {
     final response = await Dio().get(ApiConstance.popularMoviesPath);
 
     if (response.statusCode == 200) {
-      return List<MoviesModel>.from(response.data["results"] as List)
-          .map((e) => MoviesModel.fromJson(e as Map<String, dynamic>));
+      return List.from((response.data["results"] as List)
+          .map((e) => MoviesModel.fromJson(e)));
     } else {
       throw ServerException(
           errorMessageModel: ErrorMessageModel.froJson(response.data));
@@ -40,17 +40,15 @@ class MovieRemoteDataSource extends BaseMovieRemoteDataSource {
   }
 
   @override
-  Future<Iterable<MoviesModel>> getTopRatedMovies() async {
+  Future<List<MoviesModel>?> getTopRatedMovies() async {
     final response = await Dio().get(ApiConstance.topRatedMoviesPath);
 
     if (response.statusCode == 200) {
-      return List<MoviesModel>.from(response.data["results"] as List)
-          .map((e) => MoviesModel.fromJson(e as Map<String, dynamic>));
+      return List.from((response.data["results"] as List)
+          .map((e) => MoviesModel.fromJson(e)));
     } else {
       throw ServerException(
           errorMessageModel: ErrorMessageModel.froJson(response.data));
     }
   }
-
-
 }
