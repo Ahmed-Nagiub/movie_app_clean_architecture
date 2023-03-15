@@ -8,7 +8,7 @@ MovieDetail movieDetailDummy =  const MovieDetail(
     Genres(name: 'Family', id: 10751),
   ],
   id: 438148,
-  overView:
+  overview:
       "A fanboy of a supervillain supergroup known as the Vicious 6, Gru hatches a plan to become evil enough to join them, with the backup of his followers, the Minions.",
   releaseDate: "2022-06-29",
   runtime: 87,
