@@ -1,6 +1,11 @@
 import 'package:dartz/dartz.dart';
 import 'package:movie_app_ca/core/error/failure.dart';
 import 'package:movie_app_ca/movies/domain/entities/movie.dart';
+import 'package:movie_app_ca/movies/domain/entities/movie_detail.dart';
+import 'package:movie_app_ca/movies/domain/entities/recommendation.dart';
+import 'package:movie_app_ca/movies/domain/usecases/get_movie_details_usecase.dart';
+import 'package:movie_app_ca/movies/domain/usecases/get_recommendation_usecase.dart';
+
 
 abstract class BaseMovieRepository {
   Future<Either<Failure ,List<Movies>>> getNowPlayingMovies();
@@ -8,4 +13,8 @@ abstract class BaseMovieRepository {
   Future<Either<Failure ,List<Movies>>> getPopularMovies();
 
   Future<Either<Failure ,List<Movies>>> getTopRatedMovies();
+
+  Future<Either<Failure ,MovieDetail>> getMovieDetails(MovieDetailParameters parameters);
+
+  Future<Either<Failure ,List<Recommendation>>> getRecommendation(RecommendationParameters parameters);
 }

@@ -11,7 +11,7 @@ class MoviesModel extends Movies {
     required super.releaseDate,
   });
 
-  factory MoviesModel.fromJson(dynamic json)=>
+  factory MoviesModel.fromJson(Map<String , dynamic> json)=>
       MoviesModel(
           id: json["id"],
           title: json["title"],
